@@ -1,1 +1,9 @@
-<p>equalizer works!</p>
+<button (click)="start()">start</button>
+<button (click)="stop()">stop</button>
+
+<main>
+
+  <div *ngFor="let bar of visualizer.bar" [ngStyle]="getStyle(bar)"></div>
+
+</main>
+<div class="test"></div>
