@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-equalizer',
@@ -6,9 +6,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./equalizer.component.css']
 })
 export class EqualizerComponent implements OnInit {
- visualizer: Visualizer;
+  visualizer: Visualizer;
   bars: Bar[] = [];
-  barCount: number = 3;
+  barCount: number = 64;
   source: MediaElementAudioSourceNode;
   audio: any;
   frqCount: number;
@@ -24,9 +24,9 @@ export class EqualizerComponent implements OnInit {
 
     this.ctx = new AudioContext();
     this.analyser = this.ctx.createAnalyser();
-    this.frqCount = this.analyser.frequencyBinCount * 255;
+    this.frqCount = this.analyser.frequencyBinCount;
     this.audio = new Audio();
-    this.audio.src = "./assets/file_example_MP3_5MG.mp3";
+    this.audio.src = "./assets/10 Wham Bam Shang-A-Lang.mp3";
     this.audio.controls = true;
     this.audio.loop = false;
     this.audio.autoplay = true;
@@ -34,10 +34,9 @@ export class EqualizerComponent implements OnInit {
     this.visualizer = new Visualizer;
     for (let index = 0; index < this.barCount; index++) {
       let newBar: Bar = new Bar;
-      newBar.height = 5;
       this.visualizer.bar.push(newBar);
     }
-    
+
     this.source = this.ctx.createMediaElementSource(this.audio);
     this.source.connect(this.analyser);
     this.analyser.connect(this.ctx.destination);
@@ -51,27 +50,46 @@ export class EqualizerComponent implements OnInit {
   play() {
     requestAnimationFrame(() => this.play());
     let arr = new Uint8Array(this.analyser.frequencyBinCount);
-    this.analyser.getByteFrequencyData(arr);
-    if (arr[0]) {
-      //console.log(arr);
-    }
-    
+    this.analyser.getByteFrequencyData(arr); //getByteFrequencyData returns a normalized array of values between 0 and 255
+    let reducedFrequency = this.getReducedFrequencyParts(this.barCount, arr)
+
     this.visualizer.bar.forEach((bar,barIndex) => {
-      bar.height = arr.reduce((total,current,arrIndex) => {
-        if (arrIndex < arr.length / this.visualizer.bar.length - barIndex && arrIndex >= barIndex * (arr.length / this.visualizer.bar.length)) {
-          return total + current;
-        }
-        return total;
-      },0) / (arr.length / this.visualizer.bar.length);
-      console.log(bar.height);
+      bar.height = reducedFrequency[barIndex]
     })
   }
 
   getStyle(bar: Bar) {
-    console.log("bar height: " + bar.height);
     return {
-      height: bar.height + 'px'
+      height: bar.height + '%'
     }
+  }
+
+  getReducedFrequencyParts(parts: number = 3, frequencyFull: Uint8Array): number[] {
+    let decibel: number;
+    let result: number[] = [];
+    let frequencyPart: Uint8Array;
+    const lengthArrays: number = Math.floor(frequencyFull.length / parts);
+
+    for (let i = 0; i < parts - 1; i++) {
+      frequencyPart = frequencyFull.slice(i * lengthArrays, i * lengthArrays + lengthArrays)
+      decibel = frequencyPart.reduce((acc,curr) => acc + curr, 0)
+      decibel = decibel / frequencyPart.length;
+      decibel = decibel / 255 * 100 //we want height in percentages so that developer can put it in some class with desired height
+      result.push(decibel);
+    }
+
+    //the last one might no be dividible so that is why it is out of loop
+    frequencyPart = frequencyFull.slice((parts - 1) * lengthArrays)
+    decibel = frequencyPart.reduce((acc,curr) => acc + curr, 0)
+    decibel = decibel / frequencyPart.length;
+    decibel = decibel / 255 * 100 //we want height in percentages so that developer can put it in some class with desired height
+    result.push(decibel);
+
+    return result;
+  }
+
+  getAmebaStyle(): Object {
+    return {'border-radius': `${this.visualizer.bar[0].height}% ${this.visualizer.bar[1].height}% ${this.visualizer.bar[2].height}% ${this.visualizer.bar[3].height}% / ${this.visualizer.bar[4].height}% ${this.visualizer.bar[5].height}% ${this.visualizer.bar[6].height}% ${this.visualizer.bar[7].height}%`}
   }
 
 }
