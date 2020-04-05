@@ -1,0 +1,14 @@
+div {
+    color: var(--Font-Color);
+    transition: background-color .3s ease, color .5s ease;
+}
+nav {
+    background-color: var(--Nav-BG-Color);
+    height: var(--nav-height);
+    transition: inherit;
+}
+main {
+    background-color: var(--Main-BG-Color);
+    min-height: calc(100vh - var(--nav-height));
+    transition: inherit;
+}

@@ -5,7 +5,13 @@
   "projects": {
     "component-runway": {
       "projectType": "application",
-      "schematics": {},
+      "schematics": {
+        "@schematics/angular": {
+          "component": {
+            "changeDetection": "OnPush"
+          }
+        }
+      },
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",

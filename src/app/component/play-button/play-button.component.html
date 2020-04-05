@@ -1,0 +1,10 @@
+<button (click)="changeState()">
+    <svg viewBox="0 0 100 100" width="50px" height="50px">
+        <circle class="icon-stroked" cx="50" cy="50" r="40"/>
+        <polyline *ngIf="!playing" @play class="icon" points="38,35 68,50 38,65 38,35"/>
+        <g *ngIf="playing">
+            <rect @pauseLeft class="icon" x="35" y="35" width="10" height="30"/>
+            <rect @pauseRight class="icon" x="55" y="35" width="10" height="30"/>
+        </g>
+    </svg>
+</button>

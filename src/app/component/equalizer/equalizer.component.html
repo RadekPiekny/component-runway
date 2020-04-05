@@ -1,11 +1,6 @@
-<button (click)="start()">start</button>
-<button (click)="stop()">stop</button>
+<play-button (playing$)="playToggle()"></play-button>
+<stop-button (stop$)="stop()"></stop-button>
 
 <div class="visualizer-container" *ngIf="visualizer">
   <div *ngFor="let bar of visualizer.bar" [ngStyle]="getStyle(bar)" class="bar"></div>
-</div>
-
-https://9elements.github.io/fancy-border-radius
-<div *ngIf="visualizer">
-  <div class="ameba" [ngStyle]="getAmebaStyle()"></div>
 </div>

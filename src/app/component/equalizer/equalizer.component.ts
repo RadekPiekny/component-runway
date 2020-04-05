@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs';
 import { Component, OnInit, ViewChild } from '@angular/core';
 
 @Component({
@@ -6,9 +7,11 @@ import { Component, OnInit, ViewChild } from '@angular/core';
   styleUrls: ['./equalizer.component.css']
 })
 export class EqualizerComponent implements OnInit {
+  playerPlaying: boolean = false;
+  playerPlaying$: Observable<boolean>;
   visualizer: Visualizer;
   bars: Bar[] = [];
-  barCount: number = 64;
+  barCount: number = 10;
   source: MediaElementAudioSourceNode;
   audio: any;
   frqCount: number;
@@ -17,7 +20,6 @@ export class EqualizerComponent implements OnInit {
   @ViewChild('audio',{static: true}) audioElement:HTMLAudioElement;
 
   ngOnInit() {
-
   }
 
   start() {
@@ -40,11 +42,25 @@ export class EqualizerComponent implements OnInit {
     this.source = this.ctx.createMediaElementSource(this.audio);
     this.source.connect(this.analyser);
     this.analyser.connect(this.ctx.destination);
-    this.play();
   }
 
   stop() {
+    this.ctx.resume();
     this.audio.pause();
+    this.audio.currentTime = 0;
+  }
+
+  playToggle() {
+    if (this.ctx === undefined || this.audio.currentTime == 0) {
+      this.start();
+      this.play();
+      return;
+    }
+    if(this.ctx.state === 'running') {
+      this.ctx.suspend();
+    } else if(this.ctx.state === 'suspended') {
+      this.ctx.resume();
+    }
   }
 
   play() {
@@ -86,10 +102,6 @@ export class EqualizerComponent implements OnInit {
     result.push(decibel);
 
     return result;
-  }
-
-  getAmebaStyle(): Object {
-    return {'border-radius': `${this.visualizer.bar[0].height}% ${this.visualizer.bar[1].height}% ${this.visualizer.bar[2].height}% ${this.visualizer.bar[3].height}% / ${this.visualizer.bar[4].height}% ${this.visualizer.bar[5].height}% ${this.visualizer.bar[6].height}% ${this.visualizer.bar[7].height}%`}
   }
 
 }

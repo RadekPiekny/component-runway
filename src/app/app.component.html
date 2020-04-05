@@ -1,1 +1,9 @@
-<app-equalizer></app-equalizer>
+
+<div [attr.data-theme]="darkMode ? 'dark':'light'">
+    <nav>
+        <a routerLink="equalizer">equalizer</a>
+    </nav>
+    <main>
+        <router-outlet></router-outlet>
+    </main>
+</div>
