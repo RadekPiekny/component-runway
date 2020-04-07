@@ -4,7 +4,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 @Component({
   selector: 'app-equalizer',
   templateUrl: './equalizer.component.html',
-  styleUrls: ['./equalizer.component.css']
+  styleUrls: ['./equalizer.component.scss'],
+  host: {'class': 'card'}
 })
 export class EqualizerComponent implements OnInit {
   playerPlaying: boolean = false;

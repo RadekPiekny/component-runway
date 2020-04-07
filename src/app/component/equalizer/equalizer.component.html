@@ -2,5 +2,5 @@
 <stop-button (stop$)="stop()"></stop-button>
 
 <div class="visualizer-container" *ngIf="visualizer">
-  <div *ngFor="let bar of visualizer.bar" [ngStyle]="getStyle(bar)" class="bar"></div>
+  <div *ngFor="let bar of visualizer.bar" [ngStyle]="getStyle(bar)" class="bar" [class.suspended]="ctx.state === 'suspended'"></div>
 </div>

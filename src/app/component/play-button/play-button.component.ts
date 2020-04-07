@@ -4,7 +4,7 @@ import { trigger, style, animate, transition } from '@angular/animations';
 @Component({
   selector: 'play-button',
   templateUrl: './play-button.component.html',
-  styleUrls: ['./play-button.component.css'],
+  styleUrls: ['./play-button.component.scss'],
   animations: [
     trigger('play', [
       transition(':enter', [

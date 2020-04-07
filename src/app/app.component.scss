@@ -11,4 +11,5 @@ main {
     background-color: var(--Main-BG-Color);
     min-height: calc(100vh - var(--nav-height));
     transition: inherit;
+    display: block;
 }
