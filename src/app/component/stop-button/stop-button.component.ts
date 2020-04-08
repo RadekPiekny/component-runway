@@ -1,5 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy, EventEmitter, Output } from '@angular/core';
 import { trigger, state, style, animate, transition } from '@angular/animations';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'stop-button',
@@ -16,6 +17,8 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
 })
 export class StopButtonComponent implements OnInit {
   stop: boolean = true;
+  animationEnd: boolean = false;
+  click$: Subject<boolean> = new Subject<boolean>();
   @Output() stop$ = new EventEmitter<boolean>();
   constructor() { }
 
@@ -25,6 +28,14 @@ export class StopButtonComponent implements OnInit {
   changeState() {
     this.stop = !this.stop;
     this.stop$.emit(this.stop);
+    this.animationEnd = false;
+    this.click$.next(true);
+  }
+
+  test(e: AnimationEvent) {
+    if (e.animationName == 'press') {
+      this.animationEnd = true;
+    }
   }
 
 }

@@ -1,0 +1,21 @@
+:host {
+    display: flex;
+    width: 100vw;
+}
+aside {
+    margin: 16px;
+}
+a {
+    text-decoration: none;
+    margin: 16px;
+    display: block;
+}
+.runway {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.router-link-active {
+    color: coral;
+}

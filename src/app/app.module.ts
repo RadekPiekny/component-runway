@@ -8,6 +8,7 @@ import { EqualizerComponent } from './component/equalizer/equalizer.component';
 import { HomeComponent } from './view/home/home.component';
 import { PlayButtonComponent } from './component/play-button/play-button.component';
 import { StopButtonComponent } from './component/stop-button/stop-button.component';
+import { RunwayComponent } from './view/runway/runway.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { StopButtonComponent } from './component/stop-button/stop-button.compone
     EqualizerComponent,
     HomeComponent,
     PlayButtonComponent,
-    StopButtonComponent
+    StopButtonComponent,
+    RunwayComponent
   ],
   imports: [
     BrowserModule,

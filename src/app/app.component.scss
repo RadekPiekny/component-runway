@@ -6,10 +6,12 @@ nav {
     background-color: var(--Nav-BG-Color);
     height: var(--nav-height);
     transition: inherit;
+    position: relative;
+    z-index: 1;
 }
 main {
     background-color: var(--Main-BG-Color);
     min-height: calc(100vh - var(--nav-height));
     transition: inherit;
-    display: block;
+    display: flex;
 }

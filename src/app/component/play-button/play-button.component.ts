@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter, Input } from '@angular/core';
 import { trigger, style, animate, transition } from '@angular/animations';
 
 @Component({
@@ -37,7 +37,7 @@ import { trigger, style, animate, transition } from '@angular/animations';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PlayButtonComponent implements OnInit {
-  playing: boolean = false;
+  @Input() playing: boolean = false;
   @Output() playing$ = new EventEmitter<boolean>();
   constructor() { }
 

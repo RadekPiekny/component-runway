@@ -1,5 +1,5 @@
 import { Observable } from 'rxjs';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'app-equalizer',
@@ -18,6 +18,8 @@ export class EqualizerComponent implements OnInit {
   frqCount: number;
   ctx: AudioContext;
   analyser: AnalyserNode;
+
+  constructor(private cdr: ChangeDetectorRef) {}
   @ViewChild('audio',{static: true}) audioElement:HTMLAudioElement;
 
   ngOnInit() {
@@ -49,18 +51,22 @@ export class EqualizerComponent implements OnInit {
     this.ctx.resume();
     this.audio.pause();
     this.audio.currentTime = 0;
+    this.playerPlaying = false;
   }
 
   playToggle() {
     if (this.ctx === undefined || this.audio.currentTime == 0) {
+      this.playerPlaying = true;
       this.start();
       this.play();
       return;
     }
     if(this.ctx.state === 'running') {
       this.ctx.suspend();
+      this.playerPlaying = false;
     } else if(this.ctx.state === 'suspended') {
       this.ctx.resume();
+      this.playerPlaying = true;
     }
   }
 
@@ -73,6 +79,7 @@ export class EqualizerComponent implements OnInit {
     this.visualizer.bar.forEach((bar,barIndex) => {
       bar.height = reducedFrequency[barIndex]
     })
+    this.cdr.detectChanges();
   }
 
   getStyle(bar: Bar) {
