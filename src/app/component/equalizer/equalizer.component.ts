@@ -9,6 +9,7 @@ import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
 })
 export class EqualizerComponent implements OnInit {
   playerPlaying: boolean = false;
+  songs: FileList;
   playerPlaying$: Observable<boolean>;
   visualizer: Visualizer;
   bars: Bar[] = [];
@@ -112,10 +113,18 @@ export class EqualizerComponent implements OnInit {
     return result;
   }
 
+  filesChange(e: HTMLInputEvent) {
+    this.songs = e.target.files;
+  }
+
 }
 
 class Bar {
   height: number = 5;
+}
+
+interface HTMLInputEvent extends Event {
+  target: HTMLInputElement & EventTarget;
 }
 
 class Visualizer {

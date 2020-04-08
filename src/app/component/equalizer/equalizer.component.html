@@ -1,6 +1,6 @@
 <play-button [playing]="playerPlaying" (playing$)="playToggle()"></play-button>
 <stop-button (stop$)="stop()"></stop-button>
-
+<input type="file" multiple (change)="filesChange($event)"/>
 <div class="visualizer-container" *ngIf="visualizer">
   <div *ngFor="let bar of visualizer.bar" [ngStyle]="getStyle(bar)" class="bar" [class.suspended]="ctx.state === 'suspended'"></div>
 </div>
