@@ -1,6 +1,12 @@
-<play-button [playing]="playerPlaying" (playing$)="playToggle()"></play-button>
-<stop-button (stop$)="stop()"></stop-button>
-<input type="file" multiple (change)="filesChange($event)"/>
-<div class="visualizer-container" *ngIf="visualizer">
+
+
+<div class="flex">
+  <button-eject></button-eject>
+  <button-back></button-back>
+  <button-stop (stop$)="stop()"></button-stop>
+  <button-forward></button-forward>
+</div>
+<div class="visualizer-container" *ngIf="visualizer && audio.currentTime !== 0">
   <div *ngFor="let bar of visualizer.bar" [ngStyle]="getStyle(bar)" class="bar" [class.suspended]="ctx.state === 'suspended'"></div>
 </div>
+<button-play [playing]="playerPlaying" (playing$)="playToggle()"></button-play>

@@ -49,10 +49,12 @@ export class EqualizerComponent implements OnInit {
   }
 
   stop() {
-    this.ctx.resume();
-    this.audio.pause();
-    this.audio.currentTime = 0;
-    this.playerPlaying = false;
+    if (this.ctx) {
+      this.audio.currentTime = 0;
+      //this.ctx.resume();
+      this.audio.pause();
+      this.playerPlaying = false;
+    }
   }
 
   playToggle() {
@@ -113,19 +115,13 @@ export class EqualizerComponent implements OnInit {
     return result;
   }
 
-  filesChange(e: HTMLInputEvent) {
-    this.songs = e.target.files;
-  }
-
 }
 
 class Bar {
   height: number = 5;
 }
 
-interface HTMLInputEvent extends Event {
-  target: HTMLInputElement & EventTarget;
-}
+
 
 class Visualizer {
   bar: Bar[] = [];

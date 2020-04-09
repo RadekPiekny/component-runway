@@ -1,0 +1,10 @@
+<button class="button-icon">
+    <svg viewBox="0 0 100 100">
+        <circle class="icon-stroked" cx="50" cy="50" r="40"/>
+        <g [ngClass]="getClass">
+            <polyline class="icon" points="35,55 65,55 50,35 35,55"/>
+            <rect class="icon" x="35" y="60" width="30" height="5"/>
+        </g>
+    </svg>
+</button>
+<input class="files" type="file" multiple (click)="animate()" (change)="filesChange($event)"/>

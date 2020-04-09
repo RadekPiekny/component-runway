@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PlayButtonComponent } from './play-button.component';
+import { ButtonStopComponent } from './button-stop.component';
 
-describe('PlayButtonComponent', () => {
-  let component: PlayButtonComponent;
-  let fixture: ComponentFixture<PlayButtonComponent>;
+describe('StopButtonComponent', () => {
+  let component: ButtonStopComponent;
+  let fixture: ComponentFixture<ButtonStopComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PlayButtonComponent ]
+      declarations: [ ButtonStopComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PlayButtonComponent);
+    fixture = TestBed.createComponent(ButtonStopComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

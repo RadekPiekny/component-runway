@@ -1,0 +1,9 @@
+<button class="button-icon" (click)="animate()">
+    <svg viewBox="0 0 100 100">
+        <circle class="icon-stroked" cx="50" cy="50" r="40"/>
+        <g [ngClass]="getClass">
+            <polyline class="icon" points="64,35 51,50 64,65 64,35"/>
+            <polyline class="icon" points="44,35 31,50 44,65 44,35"/>
+        </g>
+    </svg>
+</button>

@@ -55,3 +55,49 @@ html,body {
 .elevation-5 {
     box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
 }
+
+.button-icon {
+    background: none;
+	color: inherit;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
+}
+.button-icon .icon {
+    stroke: none;
+    fill: var(--Icon-Fill);
+    transform-origin: center center;
+}
+.button-icon svg g {
+    transform-origin: inherit;
+}
+.button-icon .icon-stroked {
+    stroke: var(--Icon-Fill);
+    stroke-width: 3;
+    fill: none;
+}
+.button-icon svg {
+    width: 36px;
+    height: 36px;
+}
+.pressed {
+    animation: .3s ease-in-out 0s icon-press;
+}
+.pressed-again {
+    animation: .3s ease-in-out 0s icon-press-again;
+}
+@keyframes icon-press {
+    50% { transform: scale(1);}
+    50% { transform: scale(.8);}
+    100% { transform: scale(1);}
+}
+@keyframes icon-press-again {
+    50% { transform: scale(1);}
+    50% { transform: scale(.8);}
+    100% { transform: scale(1);}
+}
+.flex {
+    display: flex;
+}

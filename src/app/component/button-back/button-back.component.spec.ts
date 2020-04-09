@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { StopButtonComponent } from './stop-button.component';
+import { ButtonBackComponent } from './button-back.component';
 
-describe('StopButtonComponent', () => {
-  let component: StopButtonComponent;
-  let fixture: ComponentFixture<StopButtonComponent>;
+describe('ButtonBackComponent', () => {
+  let component: ButtonBackComponent;
+  let fixture: ComponentFixture<ButtonBackComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ StopButtonComponent ]
+      declarations: [ ButtonBackComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(StopButtonComponent);
+    fixture = TestBed.createComponent(ButtonBackComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

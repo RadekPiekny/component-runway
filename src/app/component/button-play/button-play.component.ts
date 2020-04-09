@@ -2,9 +2,9 @@ import { Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter, Input
 import { trigger, style, animate, transition } from '@angular/animations';
 
 @Component({
-  selector: 'play-button',
-  templateUrl: './play-button.component.html',
-  styleUrls: ['./play-button.component.scss'],
+  selector: 'button-play',
+  templateUrl: './button-play.component.html',
+  styleUrls: ['./button-play.component.scss'],
   animations: [
     trigger('play', [
       transition(':enter', [
@@ -36,7 +36,7 @@ import { trigger, style, animate, transition } from '@angular/animations';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PlayButtonComponent implements OnInit {
+export class ButtonPlayComponent implements OnInit {
   @Input() playing: boolean = false;
   @Output() playing$ = new EventEmitter<boolean>();
   constructor() { }
