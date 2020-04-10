@@ -1,4 +1,5 @@
-import { Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Output, EventEmitter, Input } from '@angular/core';
+import { IButtonOutlineStyle, HTMLInputEvent } from './../../model/buttons.model';
 
 @Component({
   selector: 'button-eject',
@@ -6,13 +7,10 @@ import { Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter } from
   styleUrls: ['./button-eject.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ButtonEjectComponent implements OnInit {
+export class ButtonEjectComponent {
   clickToggle: boolean;
+  @Input() buttonOutlineStyle: IButtonOutlineStyle;
   @Output() files: EventEmitter<FileList> = new EventEmitter<FileList>();
-  constructor() { }
-
-  ngOnInit(): void {
-  }
 
   animate() {
     if (this.clickToggle===undefined) {
@@ -36,6 +34,3 @@ export class ButtonEjectComponent implements OnInit {
 
 }
 
-interface HTMLInputEvent extends Event {
-  target: HTMLInputElement & EventTarget;
-}

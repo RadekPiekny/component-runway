@@ -1,12 +1,21 @@
 
 
-<div class="flex">
-  <button-eject></button-eject>
-  <button-back></button-back>
-  <button-stop (stop$)="stop()"></button-stop>
-  <button-forward></button-forward>
+{{activeSong}}
+<button-eject (files)="songs = $event"></button-eject>
+<div class="list-songs">
+  <ul [ngStyle]="listPosition">
+    <li *ngFor="let song of songs">
+      <span class="margin-auto">{{song.name}}</span> 
+    </li>
+  </ul>
+</div>
+
+<div class="flex flex-space-evenly">
+  <button-back [buttonOutlineStyle]="buttonOutlineStyle" (click)="activateSong(-1)"></button-back>
+  <button-stop [buttonOutlineStyle]="buttonOutlineStyle" (stop$)="stop()"></button-stop>
+  <button-forward [buttonOutlineStyle]="buttonOutlineStyle" (click)="activateSong(1)"></button-forward>
 </div>
 <div class="visualizer-container" *ngIf="visualizer && audio.currentTime !== 0">
   <div *ngFor="let bar of visualizer.bar" [ngStyle]="getStyle(bar)" class="bar" [class.suspended]="ctx.state === 'suspended'"></div>
 </div>
-<button-play [playing]="playerPlaying" (playing$)="playToggle()"></button-play>
+<button-play class="margin-auto" [buttonOutlineStyle]="buttonOutlineStyle" [playing]="playerPlaying" (playing$)="playToggle()"></button-play>

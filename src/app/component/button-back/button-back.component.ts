@@ -1,4 +1,5 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
+import { IButtonOutlineStyle } from './../../model/buttons.model';
 
 @Component({
   selector: 'button-back',
@@ -6,8 +7,8 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
   styleUrls: ['./button-back.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ButtonBackComponent implements OnInit {
-
+export class ButtonBackComponent {
+  @Input() buttonOutlineStyle: IButtonOutlineStyle;
   clickToggle: boolean;
 
   animate() {
@@ -24,9 +25,6 @@ export class ButtonBackComponent implements OnInit {
       return null;
     }
     return this.clickToggle ? 'pressed':'pressed-again';
-  }
-
-  ngOnInit(): void {
   }
 
 }

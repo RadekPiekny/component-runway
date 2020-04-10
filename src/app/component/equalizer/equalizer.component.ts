@@ -9,6 +9,7 @@ import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
 })
 export class EqualizerComponent implements OnInit {
   playerPlaying: boolean = false;
+  activeSong: number = 0;
   songs: FileList;
   playerPlaying$: Observable<boolean>;
   visualizer: Visualizer;
@@ -19,6 +20,12 @@ export class EqualizerComponent implements OnInit {
   frqCount: number;
   ctx: AudioContext;
   analyser: AnalyserNode;
+
+  buttonOutlineStyle  = {
+    'stroke': 'var(--Icon-Fill)',
+    'stroke-width': 3,
+    'fill': 'none'
+  }
 
   constructor(private cdr: ChangeDetectorRef) {}
   @ViewChild('audio',{static: true}) audioElement:HTMLAudioElement;
@@ -113,6 +120,25 @@ export class EqualizerComponent implements OnInit {
     result.push(decibel);
 
     return result;
+  }
+
+  activateSong(addition: number) {
+    const newOrder = this.activeSong + addition;
+
+    switch (true) {
+      case newOrder > this.songs.length - 1:
+        this.activeSong = 0;
+        break;
+      case newOrder < 0:
+        this.activeSong = this.songs.length - 1;
+        break;
+      default:
+        this.activeSong = newOrder;
+    }
+  }
+
+  get listPosition() {
+    return {transform: 'translateX(-' + this.activeSong * 100 + '%)'};
   }
 
 }

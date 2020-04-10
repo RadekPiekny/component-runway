@@ -1,5 +1,6 @@
-import { Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter, Input } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Output, EventEmitter, Input } from '@angular/core';
 import { trigger, style, animate, transition } from '@angular/animations';
+import { IButtonOutlineStyle } from 'src/app/model/buttons.model';
 
 @Component({
   selector: 'button-play',
@@ -36,13 +37,11 @@ import { trigger, style, animate, transition } from '@angular/animations';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ButtonPlayComponent implements OnInit {
+export class ButtonPlayComponent {
+  @Input() buttonOutlineStyle: IButtonOutlineStyle;
   @Input() playing: boolean = false;
   @Output() playing$ = new EventEmitter<boolean>();
   constructor() { }
-
-  ngOnInit(): void {
-  }
 
   changeState() {
     this.playing = !this.playing;

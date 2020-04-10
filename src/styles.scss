@@ -73,11 +73,6 @@ html,body {
 .button-icon svg g {
     transform-origin: inherit;
 }
-.button-icon .icon-stroked {
-    stroke: var(--Icon-Fill);
-    stroke-width: 3;
-    fill: none;
-}
 .button-icon svg {
     width: 36px;
     height: 36px;
@@ -100,4 +95,10 @@ html,body {
 }
 .flex {
     display: flex;
+}
+.flex-space-evenly {
+    justify-content: space-evenly;
+}
+.margin-auto {
+    margin: auto;
 }

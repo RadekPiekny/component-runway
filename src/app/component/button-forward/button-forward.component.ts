@@ -1,4 +1,5 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
+import { IButtonOutlineStyle } from 'src/app/model/buttons.model';
 
 @Component({
   selector: 'button-forward',
@@ -6,8 +7,8 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
   styleUrls: ['./button-forward.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ButtonForwardComponent implements OnInit {
-
+export class ButtonForwardComponent {
+  @Input() buttonOutlineStyle: IButtonOutlineStyle;
   clickToggle: boolean;
 
   animate() {
@@ -24,9 +25,6 @@ export class ButtonForwardComponent implements OnInit {
       return null;
     }
     return this.clickToggle ? 'pressed':'pressed-again';
-  }
-
-  ngOnInit(): void {
   }
 
 }

@@ -1,5 +1,6 @@
-import { Component, OnInit, ChangeDetectionStrategy, EventEmitter, Output } from '@angular/core';
+import { Component, ChangeDetectionStrategy, EventEmitter, Output, Input } from '@angular/core';
 import { Subject } from 'rxjs';
+import { IButtonOutlineStyle } from 'src/app/model/buttons.model';
 
 @Component({
   selector: 'button-stop',
@@ -7,14 +8,12 @@ import { Subject } from 'rxjs';
   styleUrls: ['./button-stop.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ButtonStopComponent implements OnInit {
+export class ButtonStopComponent {
+  @Input() buttonOutlineStyle: IButtonOutlineStyle;
   stop: boolean = true;
   clickToggle: boolean;
   click$: Subject<boolean> = new Subject<boolean>();
   @Output() stop$ = new EventEmitter<boolean>();
-
-  ngOnInit(): void {
-  }
 
   changeState() {
     this.stop$.emit(true);
