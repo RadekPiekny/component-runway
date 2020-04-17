@@ -1,0 +1,12 @@
+span {
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    font-size: .8rem;
+    color: var(--Font-Emphasis);
+}
+H1 + p {
+    color: var(--Font-Addition);
+    max-width: 660px;
+    font-size: 1.5rem;
+    line-height: 1.5;
+}

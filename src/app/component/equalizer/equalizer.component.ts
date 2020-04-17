@@ -1,5 +1,7 @@
+import { BezierService } from './../../service/bezier.service';
 import { Observable } from 'rxjs';
 import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
+import { IPoint } from 'src/app/model/graphic.model';
 
 @Component({
   selector: 'app-equalizer',
@@ -14,12 +16,20 @@ export class EqualizerComponent implements OnInit {
   playerPlaying$: Observable<boolean>;
   visualizer: Visualizer;
   bars: Bar[] = [];
-  barCount: number = 10;
+  barCount: number = 8;
+  historyWaves: number = 5;
+  waves: IWave[] = [];
   source: MediaElementAudioSourceNode;
   audio: any;
   frqCount: number;
   ctx: AudioContext;
   analyser: AnalyserNode;
+
+  playlist: string[] = [
+    "./assets/02 Fox on the Run (Single Version)",
+    "./assets/10 Wham Bam Shang-A-Lang",
+    "./assets/file_example_MP3_700KB"
+  ]
 
   buttonOutlineStyle  = {
     'stroke': 'var(--Icon-Fill)',
@@ -27,7 +37,10 @@ export class EqualizerComponent implements OnInit {
     'fill': 'none'
   }
 
-  constructor(private cdr: ChangeDetectorRef) {}
+  constructor(
+    private cdr: ChangeDetectorRef,
+    private bezierService: BezierService
+  ) {}
   @ViewChild('audio',{static: true}) audioElement:HTMLAudioElement;
 
   ngOnInit() {
@@ -48,6 +61,10 @@ export class EqualizerComponent implements OnInit {
     for (let index = 0; index < this.barCount; index++) {
       let newBar: Bar = new Bar;
       this.visualizer.bar.push(newBar);
+    }
+
+    for (let index = 0; index < this.historyWaves; index++) {
+      this.waves.push({path: '', fill: `rgba(255,0,0,0.${99 - index * 18})`});
     }
 
     this.source = this.ctx.createMediaElementSource(this.audio);
@@ -86,16 +103,33 @@ export class EqualizerComponent implements OnInit {
     this.analyser.getByteFrequencyData(arr); //getByteFrequencyData returns a normalized array of values between 0 and 255
     let reducedFrequency = this.getReducedFrequencyParts(this.barCount, arr)
 
-    this.visualizer.bar.forEach((bar,barIndex) => {
-      bar.height = reducedFrequency[barIndex]
-    })
-    this.cdr.detectChanges();
+
+    for (let index = 0; index < this.waves.length; index++) {
+      setTimeout(() => {
+        this.visualizer.bar.forEach((bar,barIndex) => {
+          bar.height = reducedFrequency[barIndex]
+        })
+        this.waves[index].path = this.getPath(this.visualizer,index);
+        this.cdr.detectChanges();
+      }, (index * 200));
+    }
   }
 
   getStyle(bar: Bar) {
     return {
       height: bar.height + '%'
     }
+  }
+
+  getPath(visualizer: Visualizer, layer: number): string {
+    const start: IPoint = {x: 0, y: 10};
+    const diffX: number = 80 / this.barCount;
+    let points: IPoint[] = [];
+    visualizer.bar.forEach((bar,index) => {
+      points.push({x: start.x + (2*index) * diffX + layer * diffX / 3,y:10 + layer * -0.5});
+      points.push({x: start.x + (2 * index + 1) * diffX + layer * diffX / 3, y: start.y - (bar.height / 10) + layer * -0.5});
+    })
+    return this.bezierService.makePath(points);
   }
 
   getReducedFrequencyParts(parts: number = 3, frequencyFull: Uint8Array): number[] {
@@ -135,6 +169,8 @@ export class EqualizerComponent implements OnInit {
       default:
         this.activeSong = newOrder;
     }
+
+    this.stop();
   }
 
   get listPosition() {
@@ -147,8 +183,11 @@ class Bar {
   height: number = 5;
 }
 
-
-
 class Visualizer {
   bar: Bar[] = [];
+}
+
+interface IWave {
+  path: string;
+  fill: string;
 }

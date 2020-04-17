@@ -1,8 +1,10 @@
 :root {
-    --Dark-Main-BG-Color: rgb(40,40,40);
+    --Dark-Main-BG-Color: rgb(22,22,28);
     --Dark-Nav-BG-Color: rgb(40,40,40);
     --Dark-Nav-BG-Active: rgb(55,55,55);
-    --Dark-Font-Color: rgb(200,200,200);
+    --Dark-Font-Color: rgb(247, 248, 248);
+    --Dark-Font-Emphasis: rgb(94, 106, 210);
+    --Dark-Font-Addition: rgba(149, 162, 179,1);
     --Dark-Icon-Fill: var(--Dark-Font-Color);
     --Dark-Card-BG: rgba(55,55,55,1);
 
@@ -10,16 +12,22 @@
     --Light-Nav-BG-Color: rgb(0,191,255);
     --Light-Nav-BG-Active: rgb(200,200,200);
     --Light-Font-Color: rgb(40,40,40);
+    --Light-Font-Emphasis: rgb(94, 106, 210);
+    --Light-Font-Addition: rgba(149, 162, 179,1);
     --Light-Icon-Fill: var(--Light-Font-Color);
     --Light-Card-BG: rgb(255,255,255,1);
 
     --nav-height: 3rem;
+    font-family: "Inter UI","SF Pro Display",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen,Ubuntu, Cantarell,"Open Sans","Helvetica Neue",sans-serif;
+    
 }
 [data-theme="light"] {
     --Main-BG-Color: var(--Light-Main-BG-Color);
     --Nav-BG-Color: var(--Light-Nav-BG-Color);
     --Nav-BG-Active: var(--Light-Nav-BG-Active);
     --Font-Color: var(--Light-Font-Color);
+    --Font-Emphasis: var(--Light-Font-Emphasis);
+    --Font-Addition: var(--Light-Font-Addition);
     --Icon-Fill: var(--Light-Icon-Fill);
     --Card-BG: var(--Light-Card-BG);
 }
@@ -28,6 +36,8 @@
     --Nav-BG-Color: var(--Dark-Nav-BG-Color);
     --Nav-BG-Active: var(--Dark-Nav-BG-Active);
     --Font-Color: var(--Dark-Font-Color);
+    --Font-Emphasis: var(--Dark-Font-Emphasis);
+    --Font-Addition: var(--Dark-Font-Addition);
     --Icon-Fill: var(--Dark-Icon-Fill);
     --Card-BG: var(--Dark-Card-BG);
 }
@@ -101,4 +111,8 @@ html,body {
 }
 .margin-auto {
     margin: auto;
+}
+h1 {
+    font-weight: 800;
+    font-size: 3rem;
 }
