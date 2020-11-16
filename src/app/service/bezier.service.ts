@@ -17,6 +17,23 @@ export class BezierService {
     return result;
   }
 
+  makePolyline(points: IPoint[], type: string = 'path'): string {
+    let result: string = "";
+    switch (type) {
+        case "polyline":
+            result = points.reduce((acc: string, current: IPoint) => acc += current.x + "," + current.y + " ",result)
+            break;
+        case "path":
+            //M 100 350 l 150 -300
+            result = "M " + points.reduce((acc: string, current: IPoint) => acc += current.x + " " + current.y + " L ",result)
+            result = result.slice(0,result.length - 3);
+        default:
+            break;
+    }
+    
+    return result;
+  }
+
   catmullRom2bezier(points: IPoint[]) {
     var result = [];
     for (var i = 0; i < points.length - 1; i++) {

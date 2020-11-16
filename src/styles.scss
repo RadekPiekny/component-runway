@@ -47,7 +47,6 @@ html,body {
 .card {
     @extend .elevation-2;
     background-color: var(--Card-BG);
-    padding: 16px;
 }
 
 .elevation-1 {

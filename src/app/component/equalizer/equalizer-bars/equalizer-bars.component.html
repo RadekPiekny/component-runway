@@ -1,0 +1,3 @@
+<div class="visualizer-container">
+    <div *ngFor="let bar of visualizer.frequencyPart" [ngStyle]="getStyle(bar)" class="bar" [class.suspended]="ctx.state === 'suspended'"></div>
+</div>

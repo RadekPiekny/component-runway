@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { EqualizerComponent } from './component/equalizer/equalizer.component';
+
 import { HomeComponent } from './view/home/home.component';
 import { ButtonPlayComponent } from './component/button-play/button-play.component';
 import { ButtonStopComponent } from './component/button-stop/button-stop.component';
@@ -13,17 +13,21 @@ import { ButtonForwardComponent } from './component/button-forward/button-forwar
 import { ButtonEjectComponent } from './component/button-eject/button-eject.component';
 import { ButtonBackComponent } from './component/button-back/button-back.component';
 
+import { EqualizerWaveComponent } from './component/equalizer/equalizer-wave/equalizer.component';
+import { EqualizerBarComponent } from './component/equalizer/equalizer-bars/equalizer-bars.component';
+
 @NgModule({
   declarations: [
     AppComponent,
-    EqualizerComponent,
+    EqualizerWaveComponent,
     HomeComponent,
     ButtonPlayComponent,
     ButtonStopComponent,
     RunwayComponent,
     ButtonForwardComponent,
     ButtonEjectComponent,
-    ButtonBackComponent
+    ButtonBackComponent,
+    EqualizerBarComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,4 @@
+
+<svg [attr.height]="height" [attr.width]="width" preserveAspectRatio="none" viewBox="0 0 100 30" *ngIf="true"  (click)="playToggle()">
+  <path *ngFor="let wave of waves" [ngStyle]="getWaveStyle(wave)" [attr.d]="wave.path"/>
+</svg>
